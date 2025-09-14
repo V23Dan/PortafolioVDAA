@@ -1,0 +1,173 @@
+---
+import logo from '../icons/logo.png';
+---
+
+<header>
+  <nav class="navbar">
+    <div class="logo">
+      <img src={logo.src} alt="logo" class="logoVDAA" />
+      <h1>Victor Alvarez</h1>
+    </div>
+    <button class="menu-button" onclick="toggleMenu()">
+      <svg
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5M12 17.25h8.25"></path>
+      </svg>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#habilidades">Habilidades</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  .menu-button {
+    display: none;
+    width: 35px;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #021526;
+    color: white;
+    cursor: pointer;
+  }
+
+  .menu-button:hover {
+    background-color: #03346e;
+  }
+
+  header {
+    margin: 0;
+    padding: 0px;
+  }
+
+  .logoVDAA {
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    margin-right: 10px;
+  }
+
+  .navbar {
+    backdrop-filter: blur(15px);
+    background-color: rgba(4, 4, 28, 0.084);
+    color: white;
+    margin: auto;
+    width: 95%;
+    height: 35px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 5px;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    justify-content: space-around;
+    border-radius: 20px;
+  }
+
+  .logo {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    font-size: 14px;
+    width: 20%;
+    justify-content: center;
+    max-width: 500px;
+  }
+
+  a:hover{
+    background-color: rgba(4, 4, 49, 0.084);
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px 10px;
+    width: 60%;
+    list-style-type: none;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 1300px;
+  }
+
+  a {
+    display: block;
+    padding: 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    transition: all 300ms ease-in-out;
+  }
+
+  @media (width < 1500px) {
+    .logo {
+      width: 20%;
+    }
+
+    .nav-links {
+      width: 70%;
+    }
+
+    a {
+      padding: 10px;
+    }
+  }
+
+  @media (width < 800px) {
+    .navbar {
+      flex-wrap: wrap;
+      gap: 0;
+    }
+
+    .logo {
+      font-size: 12px;
+      width: 80%;
+    }
+    .nav-links {
+      width: 100%;
+      font-size: 12px;
+      padding: 5px;
+    }
+
+    .navbar {
+      height: auto;
+      padding: 5px;
+    }
+  }
+
+  @media (width < 768px) {
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 40px;
+      gap: 6px;
+      right: 0;
+      background-color: #021526;
+      width: 100%;
+      padding: 1rem;
+    }
+
+    .menu-button {
+      display: block;
+    }
+
+    .nav-links.show {
+      display: flex;
+    }
+  }
+</style>

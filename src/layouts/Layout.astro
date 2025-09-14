@@ -1,22 +1,28 @@
+---
+import logo from "../components/icons/logo.png";
+import "../styles/global.css"; 
+const { title } = Astro.props;
+
+import Header from "../components/ui/header.astro";
+---
+
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <title>{title}</title>
+
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" href={logo.src} />
+
+    
+  </head>
+  <body>
+    <Header />
+    <slot />
+  </body>
+</html>
