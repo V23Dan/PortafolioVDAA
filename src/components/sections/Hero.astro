@@ -52,6 +52,7 @@ import github from "../icons/github.svg";
   .hero-content {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 20px;
     max-width: 1000px;
   }
@@ -70,9 +71,10 @@ import github from "../icons/github.svg";
     width: 40%;
     height: 350px;
     background-color: #09243a;
-    box-shadow: inset 0 0 15px var(--color-background);
+    border: 1px solid white;
+    box-shadow: inset 0 0 20px 2px var(--color-background);
     padding: 15px;
-    border-radius: 20px;
+    border-radius: 25px;
     transition: all 400ms linear;
   }
 
@@ -164,6 +166,55 @@ import github from "../icons/github.svg";
     }
     to {
       --angle: 360deg;
+    }
+  }
+
+  @media(width < 1200px) {
+    .hero-content {
+      width: 80%;
+    }
+  }
+
+  @media (width <= 700px) {
+    .hero-content{
+        width: 100%;
+        margin-top: 70px;
+        flex-direction: column;
+    }
+
+    .hero-info {
+      width: 80%;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .nombre {
+      font-size: 2rem;
+    }
+
+    .hero-card {
+      width: 80%;
+      height: auto;
+      padding: 25px 15px;
+      gap: 20px;
+      flex-direction: column;
+    }
+  }
+
+  @media (width <= 400px) {
+    .logoBox{
+        width: 150px;
+        height: 150px;
+    }
+
+    .logoBox::after, .logoBox::before{
+        width: 150px;
+        height: 150px;
+    }
+
+    .logoVDAA{
+        width: 150px;
+        height: 150px;
     }
   }
 </style>
