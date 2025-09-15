@@ -1,0 +1,169 @@
+---
+import Logo from "../icons/logo.png";
+import linkedin from "../icons/linkedin.svg";
+import github from "../icons/github.svg";
+---
+
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-info">
+      <h2>¡HOLA!, mi nombre es:</h2>
+
+      <h1 class="nombre">Victor Danilo Alvarez Alvarez</h1>
+      <p>
+        Soy un entusiasta del desarrollo web con ganas de comenzar mi carrera
+        creando soluciones digitales innovadoras. Me interesa aprender y crecer
+        en cada proyecto, aplicando mis habilidades para crear experiencias
+        funcionales y atractivas. ¡Explora mi portafolio y conoce más sobre mi
+        trabajo y mis proyectos!
+      </p>
+    </div>
+    <div class="hero-card">
+      <div class="logoBox">
+        <img src={Logo.src} alt="logo" class="logoVDAA" />
+      </div>
+      <div class="box-redes">
+        <a href="" class="redes">
+          <img src={linkedin.src} alt="Logo de LinkedIn" class="logosRedes" />
+        </a>
+        <a href="" class="redes">
+          <img src={github.src} alt="Logo de Github" class="logosRedes" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  h2 {
+    color: var(--color-secondary);
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1000px;
+  }
+
+  .hero-info {
+    width: 50%;
+    font-size: 18px;
+    color: white;
+  }
+
+  .hero-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 350px;
+    background-color: #09243a;
+    box-shadow: inset 0 0 15px var(--color-background);
+    padding: 15px;
+    border-radius: 20px;
+    transition: all 400ms linear;
+  }
+
+  .hero-card:hover {
+    box-shadow: inset 0 0 15px #ffffff;
+  }
+
+  .nombre {
+    font-size: 2.5rem;
+    margin: 10px 0;
+    color: var(--color-text);
+  }
+
+  .logoVDAA {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    z-index: 2;
+  }
+
+  .box-redes {
+    width: 100%;
+    gap: 25px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .redes {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    border-radius: 100%;
+    transition: all 250ms ease-in-out;
+  }
+
+  .logosRedes {
+    width: 100%;
+    height: 100%;
+    filter: invert(1);
+  }
+
+  .redes:hover {
+    background-color: var(--color-primary);
+    translate: 0 -5px;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  .logoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .logoBox::after,
+  .logoBox::before {
+    content: "";
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    background-image: conic-gradient(
+      from var(--angle),
+      #03346e,
+      #6eacda,
+      #e2e2b6
+    );
+    padding: 3px;
+    border-radius: 100%;
+    z-index: 1;
+    animation: 3s spin linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .logoBox::before {
+    filter: blur(1.5rem);
+    opacity: 0.7;
+  }
+
+  @keyframes spin {
+    from {
+      --angle: 0deg;
+    }
+    to {
+      --angle: 360deg;
+    }
+  }
+</style>
