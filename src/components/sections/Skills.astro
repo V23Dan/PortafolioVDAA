@@ -63,7 +63,7 @@ const skills = [
 ---
 
 <section>
-  <div class="skills-content">
+  <div class="space-skills">
     <header class="header-skills">
       <h1>Habilidades y herramientas</h1>
       <div class="box-filters">
@@ -113,7 +113,7 @@ const skills = [
 
     if (!skillFilter || !skillsContainer) return;
 
-    // Función para filtrar skills con animación
+    // Función para filtrar skills
     function filterSkills(selectedCategory: string) {
       skillCards.forEach((card, index) => {
         const category = card.dataset.category;
@@ -121,19 +121,16 @@ const skills = [
           selectedCategory === "Todos" || category === selectedCategory;
 
         if (shouldShow) {
-          // Mostrar con animación
           card.style.display = "flex";
           card.style.opacity = "0";
           card.style.transform = "translateY(20px) scale(0.9)";
 
-          // Animación escalonada
           setTimeout(() => {
             card.style.transition = "all 0.4s ease";
             card.style.opacity = "1";
             card.style.transform = "translateY(0) scale(1)";
-          }, index * 50); // Retraso progresivo
+          }, index * 50);
         } else {
-          // Ocultar con animación
           card.style.transition = "all 0.3s ease";
           card.style.opacity = "0";
           card.style.transform = "translateY(-20px) scale(0.9)";
@@ -144,11 +141,9 @@ const skills = [
         }
       });
 
-      // Actualizar contador (opcional)
       updateSkillCount(selectedCategory);
     }
 
-    // Función para actualizar contador de skills
     function updateSkillCount(category: string) {
       const visibleCount =
         category === "Todos"
@@ -156,9 +151,6 @@ const skills = [
           : Array.from(skillCards).filter(
               (card) => card.dataset.category === category
             ).length;
-
-      // Podrías agregar un elemento para mostrar el conteo
-      console.log(`Mostrando ${visibleCount} habilidades`);
     }
 
     // Event listener para el select
@@ -166,7 +158,6 @@ const skills = [
       const target = e.target as HTMLSelectElement;
       const selectedCategory = target.value;
 
-      // Agregar efecto visual al filtro
       skillFilter.style.transform = "scale(0.95)";
       setTimeout(() => {
         skillFilter.style.transform = "scale(1)";
@@ -182,7 +173,6 @@ const skills = [
   // Inicializar cuando el DOM esté listo
   document.addEventListener("DOMContentLoaded", initSkillFilter);
 
-  // Para compatibilidad con Astro
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initSkillFilter);
   } else {
@@ -195,10 +185,21 @@ const skills = [
     width: 100%;
     min-height: 100vh;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    padding: 10px;
     flex-wrap: wrap;
     align-items: center;
     overflow: hidden;
+  }
+
+  .space-skills {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
   }
 
   .header-skills {
@@ -380,6 +381,18 @@ const skills = [
 
   .card-skill:hover .icons-skills {
     transform: scale(1.1) rotate(5deg);
+  }
+
+  @media (width < 1100px) {
+    .header-skills {
+      width: 85%;
+    }
+    .content-skills {
+      width: 85%;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
   }
 
   @media (max-width: 768px) {
