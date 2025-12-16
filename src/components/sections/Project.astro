@@ -1,0 +1,121 @@
+---
+import ProyectoVicBank from "../../assets/img/Projects/ProyectoVicBank.png";
+
+import LogoGitHub from "../icons/Github.svg";
+
+const projects = [
+  {
+    title: "VicBank",
+    description:
+      "Proyecto de banca en línea con autenticación por roles, gestión de cuentas y transacciones (retiros, depósitos, transacciones).",
+    image: ProyectoVicBank,
+    technologies: ["Angular", "Node.js", "Express", "PostgreSQL"],
+    githubLink: "https://github.com/V23Dan/Project_transaction_VF.git",
+  },
+];
+---
+
+<section class="projects-section">
+  <div class="content">
+    <div class="projects-section-info">
+      <h1 class="projects-title">Proyectos realizados</h1>
+      <p class="projects-info">
+        Explora mi trabajo y las soluciones que he desarrollado
+      </p>
+    </div>
+    <div class="projects-container">
+      <article class="project-card">
+        <div class="project-image-box">
+          <img
+            src={ProyectoVicBank.src}
+            alt="Imagen del proyecto VicBank"
+            class="project-image"
+          />
+        </div>
+        <section class="project-details">
+          <div>
+            <h3>Proyecto VicBank</h3>
+            <p>
+              Proyecto de banca en línea con autenticación por roles, gestión de
+              cuentas y transacciones (retiros, depósitos, transacciones).
+            </p>
+          </div>
+          <div>Tecnologías utilizadas:</div>
+        </section>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    width: 100%;
+    max-width: 1300px;
+    min-height: 100vh;
+    padding: 80px 20px;
+    margin: 0 auto;
+    background-color: var(--color-background);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .projects-section-info {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .projects-title {
+    font-size: 2.5rem;
+    color: var(--color-text);
+  }
+  .projects-info {
+    font-size: 1.2rem;
+    color: var(--color-secondary);
+  }
+
+  .projects-container {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .project-card {
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .project-image-box {
+    width: 40%;
+    overflow: hidden;
+  }
+
+  .project-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 0 0 0;
+  }
+
+  .project-details {
+    width: 60%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+</style>

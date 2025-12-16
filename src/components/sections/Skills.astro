@@ -183,6 +183,8 @@ const skills = [
 <style>
   section {
     width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -224,14 +226,12 @@ const skills = [
     border-radius: 10px;
     padding: 0.5rem 1.5rem;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
   }
 
   .box-filters:hover {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-    transform: translateY(-5px);
   }
 
   .box-filters label {
@@ -295,12 +295,7 @@ const skills = [
     gap: 30px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     padding: 20px;
-    background: linear-gradient(
-      135deg,
-      var(--color-primary) 0%,
-      rgba(3, 52, 110, 0.3) 40%,
-      var(--color-background) 100%
-    );
+    background: #09243a;
     min-height: 400px;
   }
 

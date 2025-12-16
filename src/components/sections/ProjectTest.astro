@@ -1,0 +1,671 @@
+---
+import githubIcon from "../icons/github.svg";
+import linkIcon from "../icons/link.svg";
+// Importa aquí las imágenes de tus proyectos
+// import proyecto1 from "../images/proyecto1.png";
+
+const projects = [
+  {
+    id: 1,
+    title: "E-Commerce Platform",
+    description: "Plataforma de comercio electrónico completa con carrito de compras, sistema de pagos y panel de administración.",
+    image: "/placeholder-project1.jpg", // Reemplaza con tu imagen
+    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+    category: "Fullstack",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: "https://tu-proyecto.com",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Task Management App",
+    description: "Aplicación de gestión de tareas con drag & drop, colaboración en tiempo real y notificaciones.",
+    image: "/placeholder-project2.jpg",
+    technologies: ["Angular", "Laravel", "MySQL"],
+    category: "Fullstack",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: "https://tu-proyecto.com",
+    featured: false
+  },
+  {
+    id: 3,
+    title: "Portfolio Website",
+    description: "Sitio web personal con diseño moderno, animaciones fluidas y totalmente responsive.",
+    image: "/placeholder-project3.jpg",
+    technologies: ["Astro", "CSS", "JavaScript"],
+    category: "Frontend",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: "https://tu-proyecto.com",
+    featured: true
+  },
+  {
+    id: 4,
+    title: "API REST Sistema de Inventario",
+    description: "API robusta para gestión de inventario con autenticación JWT y documentación completa.",
+    image: "/placeholder-project4.jpg",
+    technologies: ["Node.js", "PostgreSQL", "Express"],
+    category: "Backend",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: null,
+    featured: false
+  },
+  {
+    id: 5,
+    title: "Dashboard Analytics",
+    description: "Panel de análisis de datos con visualizaciones interactivas y reportes en tiempo real.",
+    image: "/placeholder-project5.jpg",
+    technologies: ["React", "D3.js", "Node.js"],
+    category: "Frontend",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: "https://tu-proyecto.com",
+    featured: true
+  },
+  {
+    id: 6,
+    title: "Blog CMS",
+    description: "Sistema de gestión de contenidos para blog con editor WYSIWYG y optimización SEO.",
+    image: "/placeholder-project6.jpg",
+    technologies: ["Laravel", "Vue.js", "MySQL"],
+    category: "Fullstack",
+    github: "https://github.com/tu-usuario/proyecto",
+    demo: "https://tu-proyecto.com",
+    featured: false
+  }
+];
+
+const categories = ["Todos", "Frontend", "Backend", "Fullstack", "Destacados"];
+---
+
+<section class="projects-section">
+  <div class="projects-container">
+    <header class="projects-header">
+      <div class="header-content">
+        <h1>Proyectos Realizados</h1>
+        <p class="header-subtitle">Explora mi trabajo y las soluciones que he desarrollado</p>
+      </div>
+      
+      <div class="filters-container">
+        <div class="box-filters">
+          <label for="projectFilter">Filtrar por:</label>
+          <select name="filtros" id="projectFilter" class="filters">
+            {categories.map(cat => (
+              <option value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+        
+        <div class="project-counter">
+          <span id="projectCount">{projects.length}</span>
+          <span>proyectos</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="projects-grid" id="projectsContainer">
+      {projects.map((project, index) => (
+        <article 
+          class="project-card" 
+          data-category={project.category}
+          data-featured={project.featured}
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          <div class="project-image-container">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              class="project-image"
+            />
+            <div class="project-overlay">
+              <div class="overlay-content">
+                <h3>{project.title}</h3>
+                <div class="project-links">
+                  <a href={project.github} class="project-link" title="Ver código">
+                    <img src={githubIcon.src} alt="GitHub" />
+                  </a>
+                  {project.demo && (
+                    <a href={project.demo} class="project-link" title="Ver demo">
+
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+            {project.featured && (
+              <span class="featured-badge">Destacado</span>
+            )}
+          </div>
+          
+          <div class="project-content">
+            <h3 class="project-title">{project.title}</h3>
+            <p class="project-description">{project.description}</p>
+            
+            <div class="project-tech">
+              {project.technologies.map(tech => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+            
+            <div class="project-actions">
+              <a href={project.github} class="btn-project">
+                <img src={githubIcon.src} alt="GitHub" />
+                Código
+              </a>
+              {project.demo && (
+                <a href={project.demo} class="btn-project btn-demo">
+
+                  Demo
+                </a>
+              )}
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  function initProjectFilter() {
+    const projectFilter = document.getElementById("projectFilter") as HTMLSelectElement;
+    const projectsContainer = document.getElementById("projectsContainer");
+    const projectCards = document.querySelectorAll(".project-card") as NodeListOf<HTMLElement>;
+    const projectCount = document.getElementById("projectCount");
+
+    if (!projectFilter || !projectsContainer) return;
+
+    function filterProjects(selectedCategory: string) {
+      let visibleCount = 0;
+      
+      projectCards.forEach((card, index) => {
+        const category = card.dataset.category;
+        const isFeatured = card.dataset.featured === "true";
+        
+        let shouldShow = false;
+        
+        if (selectedCategory === "Todos") {
+          shouldShow = true;
+        } else if (selectedCategory === "Destacados") {
+          shouldShow = isFeatured;
+        } else {
+          shouldShow = category === selectedCategory;
+        }
+
+        if (shouldShow) {
+          visibleCount++;
+          card.style.display = "block";
+          card.style.opacity = "0";
+          card.style.transform = "translateY(30px) scale(0.95)";
+          
+          setTimeout(() => {
+            card.style.transition = "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0) scale(1)";
+          }, index * 60);
+        } else {
+          card.style.transition = "all 0.3s ease-out";
+          card.style.opacity = "0";
+          card.style.transform = "translateY(-20px) scale(0.9)";
+          
+          setTimeout(() => {
+            card.style.display = "none";
+          }, 300);
+        }
+      });
+
+      // Actualizar contador
+      if (projectCount) {
+        projectCount.style.transform = "scale(0.8)";
+        setTimeout(() => {
+          projectCount.textContent = visibleCount.toString();
+          projectCount.style.transform = "scale(1)";
+        }, 200);
+      }
+    }
+
+    projectFilter.addEventListener("change", (e) => {
+      const target = e.target as HTMLSelectElement;
+      filterProjects(target.value);
+    });
+
+    // Inicializar mostrando todos
+    filterProjects("Todos");
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProjectFilter);
+  } else {
+    initProjectFilter();
+  }
+</script>
+
+<style>
+
+  .projects-section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #000000 0%, #09243a 100%);
+  }
+
+  .projects-container {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .projects-header {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .header-content {
+    text-align: center;
+  }
+
+  .header-content h1 {
+    color: var(--color-text);
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+  }
+
+  .header-content h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    border-radius: 2px;
+  }
+
+  .header-subtitle {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    margin-top: 20px;
+  }
+
+  .filters-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .box-filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(45deg, rgba(3, 52, 110, 0.1), rgba(110, 172, 218, 0.05));
+    border-radius: 10px;
+    padding: 0.5rem 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .box-filters:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .box-filters label {
+    color: var(--color-secondary);
+    font-size: 1rem;
+  }
+
+  .filters {
+    outline: none;
+    background: transparent;
+    border: 1px solid rgba(110, 172, 218, 0.2);
+    color: var(--color-text);
+    font-size: 1rem;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236eacda' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1rem;
+  }
+
+  .filters:hover {
+    border-color: rgba(110, 172, 218, 0.4);
+    background-color: rgba(9, 36, 58, 0.3);
+  }
+
+  .filters:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(110, 172, 218, 0.1);
+  }
+
+  .filters option {
+    background-color: #09243a;
+    color: var(--color-text);
+  }
+
+  .project-counter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: rgba(110, 172, 218, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(110, 172, 218, 0.2);
+  }
+
+  #projectCount {
+    color: var(--color-primary);
+    font-size: 1.5rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+  }
+
+  .project-counter span:last-child {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    background: rgba(9, 36, 58, 0.3);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    min-height: 500px;
+  }
+
+  .project-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    position: relative;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(110, 172, 218, 0.1);
+    border-color: rgba(110, 172, 218, 0.3);
+  }
+
+  .project-image-container {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #09243a, #03346e);
+  }
+
+  .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .project-card:hover .project-image {
+    transform: scale(1.1);
+  }
+
+  .project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+                rgba(3, 52, 110, 0.7),
+                rgba(9, 36, 58, 0.9));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .overlay-content {
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+  }
+
+  .project-card:hover .overlay-content {
+    transform: translateY(0);
+  }
+
+  .overlay-content h3 {
+    color: var(--color-text);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .project-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .project-link:hover {
+    background: var(--color-primary);
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .project-link img {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .project-content {
+    padding: 20px;
+  }
+
+  .project-title {
+    color: var(--color-text);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .project-description {
+    color: var(--color-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    min-height: 60px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .tech-tag {
+    background: rgba(110, 172, 218, 0.1);
+    color: var(--color-primary);
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(110, 172, 218, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .tech-tag:hover {
+    background: rgba(110, 172, 218, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .project-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-project {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid rgba(110, 172, 218, 0.3);
+    border-radius: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .btn-project img {
+    width: 18px;
+    height: 18px;
+    filter: invert(1);
+  }
+
+  .btn-project:hover {
+    background: rgba(110, 172, 218, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(110, 172, 218, 0.2);
+  }
+
+  .btn-demo {
+    background: linear-gradient(135deg, rgba(110, 172, 218, 0.1), rgba(110, 172, 218, 0.2));
+  }
+
+  .btn-demo:hover {
+    background: linear-gradient(135deg, rgba(110, 172, 218, 0.2), rgba(110, 172, 218, 0.3));
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-content h1 {
+      font-size: 2rem;
+    }
+
+    .filters-container {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .box-filters,
+    .project-counter {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      padding: 15px;
+    }
+    
+    .project-card {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .projects-section {
+      padding: 20px 10px;
+    }
+
+    .header-content h1 {
+      font-size: 1.8rem;
+    }
+
+    .header-subtitle {
+      font-size: 1rem;
+    }
+
+    .project-tech {
+      gap: 5px;
+    }
+
+    .tech-tag {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+    }
+
+    .project-actions {
+      flex-direction: column;
+    }
+  }
+</style>
