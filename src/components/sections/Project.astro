@@ -1,121 +1,329 @@
 ---
 import ProyectoVicBank from "../../assets/img/Projects/ProyectoVicBank.png";
+import ProyectoSaludIntegral from "../../assets/img/Projects/SaludIntegral.png";
+import IconGithub from "../icons/Github.svg";
 
-import LogoGitHub from "../icons/Github.svg";
+import { skills } from "./Skills.astro";
 
 const projects = [
   {
     title: "VicBank",
     description:
-      "Proyecto de banca en línea con autenticación por roles, gestión de cuentas y transacciones (retiros, depósitos, transacciones).",
+      "Sistema de banca en línea robusto. Gestiona autenticación basada en roles, transacciones seguras en tiempo real y administración de cuentas.",
     image: ProyectoVicBank,
-    technologies: ["Angular", "Node.js", "Express", "PostgreSQL"],
+    technologies: ["Angular", "Node.js", "PostgreSQL"],
     githubLink: "https://github.com/V23Dan/Project_transaction_VF.git",
   },
+  {
+    title: "Salud integral",
+    description:
+      "Plataforma web integral para la gestión de salud y bienestar potenciado con IA. Incluye seguimiento de rutinas, planes nutricionales, cálculo de métricas corporales (IMC/Grasa) y visualización de progreso mediante un dashboard interactivo y responsivo.",
+    image: ProyectoSaludIntegral,
+    technologies: ["Angular", "Node.js", "MongoDB"],
+    githubLink: "",
+  },
 ];
+
+const getSkillByName = (techName: string) => {
+  return skills.find((skill) => skill.name === techName);
+};
 ---
 
-<section class="projects-section">
-  <div class="content">
-    <div class="projects-section-info">
-      <h1 class="projects-title">Proyectos realizados</h1>
-      <p class="projects-info">
-        Explora mi trabajo y las soluciones que he desarrollado
-      </p>
-    </div>
-    <div class="projects-container">
-      <article class="project-card">
-        <div class="project-image-box">
-          <img
-            src={ProyectoVicBank.src}
-            alt="Imagen del proyecto VicBank"
-            class="project-image"
-          />
-        </div>
-        <section class="project-details">
-          <div>
-            <h3>Proyecto VicBank</h3>
-            <p>
-              Proyecto de banca en línea con autenticación por roles, gestión de
-              cuentas y transacciones (retiros, depósitos, transacciones).
-            </p>
-          </div>
-          <div>Tecnologías utilizadas:</div>
-        </section>
-      </article>
+<section id="proyectos">
+  <div class="space-projects">
+    <header class="header-projects">
+      <h1>Proyectos</h1>
+      <p>Desarrollos recientes</p>
+    </header>
+
+    <div class="content-projects">
+      {
+        projects.map((project) => (
+          <article class="card-project">
+            <div class="box-image-project">
+              <img
+                src={project.image.src}
+                alt={`Imagen del proyecto ${project.title}`}
+                class="project-img"
+              />
+
+              <div class="overlay-github">
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn-github"
+                  title="Ver código en GitHub"
+                >
+                  <img src={IconGithub.src} alt="GitHub" class="git-icon" />
+                </a>
+              </div>
+            </div>
+
+            <div class="project-info-overlay">
+              <div class="info-content">
+                <h2>{project.title}</h2>
+                <p class="description">{project.description}</p>
+
+                <div class="tech-stack-container">
+                  <span class="tech-label">Tecnologías:</span>
+                  <div class="tech-icons-grid">
+                    {project.technologies.map((techName) => {
+                      const skillData = getSkillByName(techName);
+                      return skillData ? (
+                        <div class="tech-badge" title={techName}>
+                          <img src={skillData.icon.src} alt={techName} />
+                          <span>{techName}</span>
+                        </div>
+                      ) : (
+                        <span class="tech-badge-text">{techName}</span>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .projects-section {
+  section {
     width: 100%;
     max-width: 1300px;
-    min-height: 100vh;
-    padding: 80px 20px;
     margin: 0 auto;
-    background-color: var(--color-background);
+    min-height: 100vh;
     display: flex;
+    justify-content: center;
+    padding: 40px 20px;
     align-items: center;
-    gap: 20px;
   }
 
-  .content {
+  .space-projects {
     width: 100%;
     max-width: 1000px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 auto;
-  }
-
-  .projects-section-info {
-    width: 50%;
-    display: flex;
     flex-direction: column;
+    gap: 30px;
+    align-items: center;
   }
 
-  .projects-title {
-    font-size: 2.5rem;
+  @media (min-width: 1024px) {
+    .space-projects {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+  }
+
+  .header-projects {
+    width: 100%;
+    text-align: center;
     color: var(--color-text);
   }
-  .projects-info {
-    font-size: 1.2rem;
-    color: var(--color-secondary);
+
+  @media (min-width: 1024px) {
+    .header-projects {
+      width: 20%;
+      text-align: left;
+      padding-top: 20px;
+    }
   }
 
-  .projects-container {
-    width: 50%;
+  .header-projects h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .header-projects p {
+    color: var(--color-secondary);
+    opacity: 0.8;
+  }
+
+  .content-projects {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 30px;
+    padding: 30px;
+    background: #09243a;
+    border-radius: 20px;
+    border: 1px solid rgba(110, 172, 218, 0.3);
+    box-shadow: inset 0 0 20px 2px var(--color-background);
+  }
+
+  @media (min-width: 1024px) {
+    .content-projects {
+      width: 80%;
+    }
+  }
+
+  .card-project {
     width: 100%;
-    padding: 20px;
-  }
-
-  .project-card {
-    width: 90%;
-    border-radius: 10px;
-    display: flex;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .project-image-box {
-    width: 40%;
+    height: 300px;
+    border-radius: 20px;
     overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.4s ease;
   }
 
-  .project-image {
+  .card-project:hover {
+    border-color: rgba(110, 172, 218, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Imagen de fondo */
+  .box-image-project {
     width: 100%;
-    height: auto;
-    border-radius: 10px 0 0 0;
+    height: 100%;
+    position: relative;
   }
 
-  .project-details {
-    width: 60%;
+  .project-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .card-project:hover .project-img {
+    transform: scale(1.05);
+    filter: blur(4px) brightness(0.6);
+  }
+
+  .overlay-github {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 20;
+  }
+
+  .btn-github {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(9, 36, 58, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .btn-github:hover {
+    transform: scale(1.1);
+    border-color: var(--color-primary, #6eacda);
+    box-shadow: 0 0 15px rgba(110, 172, 218, 0.4);
+  }
+
+  .git-icon {
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+  }
+
+  .project-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
     padding: 20px;
+    background: linear-gradient(to top, rgba(7, 31, 50, 0.9), transparent);
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.4s ease-in-out;
+  }
+
+  .card-project:hover .project-info-overlay {
+    opacity: 1;
+    transform: translateY(0);
+    background: rgba(9, 36, 58, 0.85);
+    backdrop-filter: blur(5px);
+  }
+
+  .info-content {
+    width: 100%;
+    color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .info-content h2 {
+    font-size: 1.8rem;
+    color: var(--color-text, #6eacda);
+    margin: 0;
+  }
+
+  .description {
+    font-size: 0.95rem;
+    color: #ddd;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .tech-stack-container {
+    margin-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+  }
+
+  .tech-label {
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .tech-icons-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .tech-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: background 0.3s;
+  }
+
+  .tech-badge:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(110, 172, 218, 0.4);
+  }
+
+  .tech-badge img {
+    width: 20px;
+    height: 20px;
+    /* Ajuste de color si tus iconos son negros, si son originales quita el filter */
+    filter: invert(1);
+  }
+
+  .tech-badge span {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  /* Fallback solo texto */
+  .tech-badge-text {
+    background: rgba(110, 172, 218, 0.1);
+    color: #6eacda;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
   }
 </style>

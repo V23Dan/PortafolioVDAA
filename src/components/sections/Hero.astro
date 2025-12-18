@@ -15,8 +15,9 @@ import github from "../icons/github.svg";
         creando soluciones digitales innovadoras. Me interesa aprender y crecer
         en cada proyecto, aplicando mis habilidades para crear experiencias
         funcionales y atractivas. ¡Explora mi portafolio y conoce más sobre mi
-        trabajo y mis proyectos!
+        trabajo y proyectos!
       </p>
+      <button class="button-cv">Descargar CV</button>
     </div>
     <div class="hero-card">
       <div class="logoBox">
@@ -51,6 +52,10 @@ import github from "../icons/github.svg";
     font-weight: 500;
     font-size: 1.5rem;
   }
+  p{
+    margin-top: 15px;
+    line-height: 1.4;
+    font-size: 1.1rem;  }
 
   .hero-content {
     display: flex;
@@ -68,13 +73,32 @@ import github from "../icons/github.svg";
     color: white;
   }
 
+  .button-cv {
+    margin-top: 10px;
+    padding: 10px 22px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid rgba(110, 172, 218, 0.3);
+    transition: background-color 250ms ease-in-out;
+  }
+
+  .button-cv:hover {
+    background-color: var(--color-primary);
+    color: white;
+  }
+
   .hero-card {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     width: 40%;
-    height: 350px;
+    height: 400px;
     background-color: #09243a;
     border: 1px solid rgba(110, 172, 218, 0.3);
     box-shadow: inset 0 0 20px 2px var(--color-background);
@@ -88,7 +112,7 @@ import github from "../icons/github.svg";
   }
 
   .nombre {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     margin: 10px 0;
     color: var(--color-text);
   }
@@ -123,7 +147,7 @@ import github from "../icons/github.svg";
 
   .redes:hover {
     background-color: var(--color-primary);
-    translate: 0 -5px;
+    translate: 0 -3px;
   }
 
   @property --angle {
