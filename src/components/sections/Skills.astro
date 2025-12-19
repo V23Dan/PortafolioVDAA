@@ -8,7 +8,8 @@ import laravel from "../icons/laravel.svg";
 import postgresql from "../icons/postgresql.svg";
 import mongodb from "../icons/mongodb.svg";
 import mysql from "../icons/mysql.svg";
-import tailwind from "../icons/Tailwind.svg"
+import tailwind from "../icons/Tailwind.svg";
+import python from "../icons/Python.svg";
 
 export const skills = [
   //Herramientas
@@ -49,6 +50,11 @@ export const skills = [
     icon: laravel,
     category: "Backend",
   },
+  {
+    name: "Python",
+    icon: python,
+    category: "Backend",
+  },
   //Bases de datos
   {
     name: "PostgreSQL",
@@ -68,7 +74,7 @@ export const skills = [
 ];
 ---
 
-<section>
+<section id="Skills">
   <div class="space-skills">
     <header class="header-skills">
       <h1>Habilidades y herramientas</h1>
@@ -193,7 +199,7 @@ export const skills = [
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
     flex-wrap: wrap;
     align-items: center;
     overflow: hidden;
