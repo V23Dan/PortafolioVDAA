@@ -12,20 +12,49 @@ import github from "../icons/github.svg";
       <h1 class="nombre">Victor Danilo Alvarez Alvarez</h1>
       <p>
         Estudiante de ingeniería de sistemas, entusiasta por el desarrollo web.
-        ¡Explora mi portafolio y conoce más sobre mi
-        trabajo y proyectos!
+        ¡Explora mi portafolio y conoce más sobre mi trabajo y proyectos!
       </p>
-      <button class="button-cv">Descargar CV</button>
+      <a class="button-cv"
+        href="../../assets/files/CV_VDAA.pdf"
+        download="CV_VDAA.pdf"
+        >Descargar CV
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          ><path
+            fill="currentColor"
+            d="M18.22 20.75H5.78A2.64 2.64 0 0 1 3.25 18v-3a.75.75 0 0 1 1.5 0v3a1.16 1.16 0 0 0 1 1.25h12.47a1.16 1.16 0 0 0 1-1.25v-3a.75.75 0 0 1 1.5 0v3a2.64 2.64 0 0 1-2.5 2.75"
+          ></path><path
+            fill="currentColor"
+            d="M12 15.75a.74.74 0 0 1-.53-.22l-4-4a.75.75 0 0 1 1.06-1.06L12 13.94l3.47-3.47a.75.75 0 0 1 1.06 1.06l-4 4a.74.74 0 0 1-.53.22"
+          ></path><path
+            fill="currentColor"
+            d="M12 15.75a.76.76 0 0 1-.75-.75V4a.75.75 0 0 1 1.5 0v11a.76.76 0 0 1-.75.75"
+          ></path></svg
+        >
+    </a>
     </div>
     <div class="hero-card">
       <div class="logoBox">
         <img src={Logo.src} alt="logo" class="logoVDAA" />
       </div>
       <div class="box-redes">
-        <a href="https://www.linkedin.com/in/victor-danilo-alvarez-alvarez-130814330" class="redes" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://www.linkedin.com/in/victor-danilo-alvarez-alvarez-130814330"
+          class="redes"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={linkedin.src} alt="Logo de LinkedIn" class="logosRedes" />
         </a>
-        <a href="https://github.com/V23Dan" class="redes" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://github.com/V23Dan"
+          class="redes"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img src={github.src} alt="Logo de Github" class="logosRedes" />
         </a>
       </div>
@@ -39,10 +68,20 @@ import github from "../icons/github.svg";
     min-height: 100vh;
     width: 100%;
     max-width: 1300px;
-    margin: 0 auto;
     justify-content: center;
     align-items: center;
     padding: 20px;
+    margin: 0 auto;
+  }
+
+  .hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
   }
 
   h2 {
@@ -50,19 +89,11 @@ import github from "../icons/github.svg";
     font-weight: 500;
     font-size: 1.5rem;
   }
-  p{
+
+  p {
     margin-top: 15px;
     line-height: 1.4;
-    font-size: 1.1rem;  }
-
-  .hero-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-    width: 100%; 
-    max-width: 1000px;
-    margin: 0 auto; 
+    font-size: 1.1rem;
   }
 
   .hero-info {
@@ -72,22 +103,28 @@ import github from "../icons/github.svg";
   }
 
   .button-cv {
+    text-decoration: none;
+    max-width: 200px;
     margin-top: 10px;
-    padding: 10px 22px;
+    padding: 10px 16px;
     background-color: var(--color-background);
-    color: var(--color-text);
+    color: var(--color-secondary);
     border: none;
     border-radius: 8px;
     font-size: 16px;
-    font-weight: 500;
     cursor: pointer;
     border: 1px solid rgba(110, 172, 218, 0.3);
-    transition: background-color 250ms ease-in-out;
+    transition: all 250ms linear;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
   }
 
   .button-cv:hover {
-    background-color: var(--color-primary);
-    color: white;
+    transform: translateY(-5px);
+    border-color: var(--color-primary, #6eacda);
+    box-shadow: 0 0 15px rgba(110, 172, 218, 0.4);
   }
 
   .hero-card {
@@ -196,63 +233,149 @@ import github from "../icons/github.svg";
     }
   }
 
-  @media(width < 1200px) {
+  @media (max-width: 1200px) {
     .hero-content {
-      width: 90%; /* Ajustado para mejor uso del espacio */
+      max-width: 900px;
     }
   }
 
-  @media (width <= 900px) {
-    .hero-content{
-      width: 85%;
-      justify-content: center;
-    }
-  }
-
-  @media (width <= 700px) {
-    .hero {
-      padding: 0 10px; /* Reduce el padding en móviles */
-    }
-    
-    .hero-content{
-        width: 100%;
-        margin-top: 70px;
-        flex-direction: column;
+  @media (max-width: 900px) {
+    .hero-content {
+      max-width: 750px;
     }
 
     .hero-info {
-      width: 90%; /* Aumentado para mejor legibilidad */
-      text-align: center;
-      font-size: 16px;
-    }
-
-    .nombre {
-      font-size: 2rem;
+      width: 55%;
     }
 
     .hero-card {
-      width: 90%; /* Aumentado para consistencia */
+      width: 45%;
+      height: 380px;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .hero {
+      min-height: 100vh;
+    }
+
+    .hero-content {
+      flex-direction: column;
+      gap: 30px;
+      margin-top: 60px;
+      max-width: 100%;
+      width: 100%;
+    }
+
+    .hero-info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .button-cv {
+      width: 40%;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+    }
+
+    .nombre {
+      font-size: clamp(1.6rem, 5vw, 2rem);
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 400px;
       height: auto;
       padding: 25px 15px;
       gap: 20px;
       flex-direction: column;
     }
+
+    .button-cv {
+      width: auto;
+      padding: 12px 28px;
+    }
   }
 
-  @media (width <= 400px) {
-    .logoBox{
-        width: 150px;
-        height: 150px;
+  @media (max-width: 500px) {
+    .hero-content {
+      margin-top: 50px;
     }
 
-    .logoBox::after, .logoBox::before{
-        width: 150px;
-        height: 150px;
+    .hero-info {
+      width: 100%;
     }
 
-    .logoVDAA{
-        width: 150px;
-        height: 150px;
+    h2 {
+      font-size: 1.2rem;
+    }
+
+    .nombre {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-top: 12px;
+    }
+
+    .button-cv {
+      font-size: 15px;
+      padding: 10px 24px;
+    }
+
+    .hero-card {
+      max-width: 350px;
+      padding: 20px 15px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero-content {
+      margin-top: 40px;
+    }
+
+    .logoBox {
+      width: 150px;
+      height: 150px;
+    }
+
+    .logoBox::after,
+    .logoBox::before {
+      width: 150px;
+      height: 150px;
+    }
+
+    .logoVDAA {
+      width: 150px;
+      height: 150px;
+    }
+
+    .hero-card {
+      max-width: 300px;
+    }
+
+    .box-redes {
+      gap: 20px;
+    }
+
+    .redes {
+      width: 35px;
+      height: 35px;
     }
   }
 </style>

@@ -26,7 +26,7 @@ const projects = [
   },
   {
     title: "SignTech",
-    description: "Aplicativo web para reconocimiento de lengua de señas colombiana, detecta alrededor de 55 señas entre letras y palabras, usando un microservicio hecho en python con tensorflow y mediaPipe. Pensado para usar con una Esp32Cam, pero con funcionamiento de camara local de laptop.",
+    description: "Aplicativo web para reconocimiento de lengua de señas colombiana, detecta alrededor de 55 señas entre letras y palabras, usando un microservicio hecho en python con tensorflow y mediaPipe.",
     image: ProyectoSignTech,
     technologies: ["React", "Node.js", "PostgreSQL", "Python"],
     githubLink: "https://github.com/V23Dan/ProyectoElectronica.git",
@@ -49,14 +49,10 @@ const getSkillByName = (techName: string) => {
       {
         projects.map((project) => {
           const projectUrl = project.githubLink || project.Link;
-
           const isGithub = !!project.githubLink;
-
           const iconSrc = isGithub ? IconGithub.src : IconLink.src;
           const iconAlt = isGithub ? "GitHub" : "Enlace al sitio";
-          const linkTitle = isGithub
-            ? "Ver código en GitHub"
-            : "Ver proyecto desplegado";
+          const linkTitle = isGithub ? "Ver código en GitHub" : "Ver proyecto desplegado";
 
           return (
             <article class="card-project">
@@ -66,16 +62,9 @@ const getSkillByName = (techName: string) => {
                   alt={`Imagen del proyecto ${project.title}`}
                   class="project-img"
                 />
-
                 {projectUrl && (
                   <div class="overlay-github">
-                    <a
-                      href={projectUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="btn-github"
-                      title={linkTitle}
-                    >
+                    <a href={projectUrl} target="_blank" rel="noopener noreferrer" class="btn-github" title={linkTitle}>
                       <img src={iconSrc} alt={iconAlt} class="git-icon" />
                     </a>
                   </div>
@@ -86,7 +75,6 @@ const getSkillByName = (techName: string) => {
                 <div class="info-content">
                   <h2>{project.title}</h2>
                   <p class="description">{project.description}</p>
-
                   <div class="tech-stack-container">
                     <span class="tech-label">Tecnologías:</span>
                     <div class="tech-icons-grid">
@@ -117,11 +105,11 @@ const getSkillByName = (techName: string) => {
   section {
     width: 100%;
     max-width: 1300px;
-    margin: 0 auto;
     min-height: 100vh;
     display: flex;
-    padding: 20px 15px;
+    padding: 20px;
     align-items: center;
+    margin: 0 auto;
   }
 
   .space-projects {
@@ -132,27 +120,13 @@ const getSkillByName = (techName: string) => {
     gap: 30px;
     align-items: center;
     margin: 0 auto;
-  }
-
-  @media (min-width: 1024px) {
-    .space-projects {
-      flex-direction: row;
-      align-items: flex-start;
-    }
+    
   }
 
   .header-projects {
     width: 100%;
     text-align: center;
     color: var(--color-text);
-  }
-
-  @media (min-width: 1024px) {
-    .header-projects {
-      width: 20%;
-      text-align: left;
-      padding-top: 20px;
-    }
   }
 
   .header-projects h1 {
@@ -167,7 +141,7 @@ const getSkillByName = (techName: string) => {
   }
 
   .content-projects {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -176,22 +150,6 @@ const getSkillByName = (techName: string) => {
     border-radius: 15px;
     border: 1px solid rgba(110, 172, 218, 0.3);
     box-shadow: inset 0 0 20px 2px var(--color-background);
-  }
-
-  @media (min-width: 640px) {
-    .content-projects {
-      padding: 25px;
-      gap: 25px;
-      border-radius: 20px;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .content-projects {
-      width: 80%;
-      padding: 30px;
-      gap: 30px;
-    }
   }
 
   .card-project {
@@ -203,19 +161,6 @@ const getSkillByName = (techName: string) => {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.02);
     transition: all 0.4s ease;
-  }
-
-  @media (min-width: 640px) {
-    .card-project {
-      height: 280px;
-      border-radius: 20px;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .card-project {
-      height: 300px;
-    }
   }
 
   .card-project:hover {
@@ -236,8 +181,7 @@ const getSkillByName = (techName: string) => {
     transition: transform 0.5s ease;
   }
 
-  .card-project:hover .project-img,
-  .card-project:active .project-img {
+  .card-project:hover .project-img {
     transform: scale(1.05);
     filter: blur(4px) brightness(0.6);
   }
@@ -247,13 +191,6 @@ const getSkillByName = (techName: string) => {
     top: 10px;
     right: 10px;
     z-index: 20;
-  }
-
-  @media (min-width: 640px) {
-    .overlay-github {
-      top: 15px;
-      right: 15px;
-    }
   }
 
   .btn-github {
@@ -269,13 +206,6 @@ const getSkillByName = (techName: string) => {
     transition: all 0.3s ease;
   }
 
-  @media (min-width: 640px) {
-    .btn-github {
-      width: 45px;
-      height: 45px;
-    }
-  }
-
   .btn-github:hover {
     transform: scale(1.1);
     border-color: var(--color-primary, #6eacda);
@@ -288,18 +218,12 @@ const getSkillByName = (techName: string) => {
     filter: invert(1);
   }
 
-  @media (min-width: 640px) {
-    .git-icon {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
   .project-info-overlay {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 15px;
@@ -308,17 +232,9 @@ const getSkillByName = (techName: string) => {
     transform: translateY(30px);
     transition: all 0.4s ease-in-out;
     overflow-y: auto;
-    overflow-x: hidden;
   }
 
-  @media (min-width: 640px) {
-    .project-info-overlay {
-      padding: 20px;
-    }
-  }
-
-  .card-project:hover .project-info-overlay,
-  .card-project:active .project-info-overlay {
+  .card-project:hover .project-info-overlay {
     opacity: 1;
     transform: translateY(0);
     background: rgba(9, 36, 58, 0.92);
@@ -331,56 +247,22 @@ const getSkillByName = (techName: string) => {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    max-height: 100%;
-  }
-
-  @media (min-width: 640px) {
-    .info-content {
-      gap: 8px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .info-content {
-      gap: 10px;
-    }
   }
 
   .info-content h2 {
     font-size: clamp(1.2rem, 4vw, 1.8rem);
     color: var(--color-text, #6eacda);
     margin: 0;
-    line-height: 1.2;
   }
 
   .description {
     font-size: clamp(0.75rem, 2vw, 0.95rem);
     color: #ddd;
     line-height: 1.3;
-    margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-  }
-
-  @media (min-width: 400px) {
-    .description {
-      -webkit-line-clamp: 4;
-      line-height: 1.4;
-    }
-  }
-
-  @media (min-width: 640px) {
-    .description {
-      line-height: 1.5;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .description {
-      -webkit-line-clamp: unset;
-    }
   }
 
   .tech-stack-container {
@@ -389,51 +271,18 @@ const getSkillByName = (techName: string) => {
     padding-top: 6px;
   }
 
-  @media (min-width: 640px) {
-    .tech-stack-container {
-      margin-top: 10px;
-      padding-top: 10px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .tech-stack-container {
-      margin-top: 15px;
-      padding-top: 15px;
-    }
-  }
-
   .tech-label {
-    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    font-size: 0.7rem;
     color: var(--color-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
     display: block;
     margin-bottom: 8px;
-  }
-
-  @media (min-width: 640px) {
-    .tech-label {
-      margin-bottom: 10px;
-    }
   }
 
   .tech-icons-grid {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-  }
-
-  @media (min-width: 640px) {
-    .tech-icons-grid {
-      gap: 12px;
-    }
-  }
-
-  @media (min-width: 769px) {
-    .tech-icons-grid {
-      gap: 15px;
-    }
   }
 
   .tech-badge {
@@ -444,20 +293,6 @@ const getSkillByName = (techName: string) => {
     padding: 5px 10px;
     border-radius: 6px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: background 0.3s;
-  }
-
-  @media (min-width: 640px) {
-    .tech-badge {
-      padding: 6px 12px;
-      border-radius: 8px;
-      gap: 8px;
-    }
-  }
-
-  .tech-badge:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(110, 172, 218, 0.4);
   }
 
   .tech-badge img {
@@ -466,15 +301,8 @@ const getSkillByName = (techName: string) => {
     filter: invert(1);
   }
 
-  @media (min-width: 640px) {
-    .tech-badge img {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
   .tech-badge span {
-    font-size: clamp(0.75rem, 1.8vw, 0.85rem);
+    font-size: 0.75rem;
     font-weight: 500;
   }
 
@@ -483,11 +311,103 @@ const getSkillByName = (techName: string) => {
     color: #6eacda;
     padding: 4px 8px;
     border-radius: 5px;
-    font-size: clamp(0.7rem, 1.5vw, 0.8rem);
+    font-size: 0.7rem;
   }
 
   @media (min-width: 640px) {
+    .content-projects {
+      padding: 25px;
+      gap: 25px;
+      border-radius: 20px;
+    }
+    .card-project {
+      height: 280px;
+      border-radius: 20px;
+    }
+    .overlay-github {
+      top: 15px;
+      right: 15px;
+    }
+    .btn-github {
+      width: 45px;
+      height: 45px;
+    }
+    .git-icon {
+      width: 24px;
+      height: 24px;
+    }
+    .project-info-overlay {
+      padding: 20px;
+    }
+    .info-content {
+      gap: 8px;
+    }
+    .description {
+      -webkit-line-clamp: 4;
+      line-height: 1.5;
+    }
+    .tech-stack-container {
+      margin-top: 10px;
+      padding-top: 10px;
+    }
+    .tech-icons-grid {
+      gap: 12px;
+    }
+    .tech-badge {
+      padding: 6px 12px;
+      border-radius: 8px;
+      gap: 8px;
+    }
+    .tech-badge img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    section{
+      margin: 0 auto;
+    }
+    .space-projects {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .header-projects {
+      width: 20%;
+      text-align: left;
+      padding-top: 20px;
+      position: sticky;
+      top: 20px;
+    }
+    .content-projects {
+      width: 80%;
+      padding: 30px;
+      gap: 30px;
+    }
+    .card-project {
+      height: 300px;
+    }
+    .info-content {
+      gap: 10px;
+    }
+    .description {
+      -webkit-line-clamp: unset; 
+    }
+    .tech-stack-container {
+      margin-top: 15px;
+      padding-top: 15px;
+    }
+    .tech-label {
+      font-size: 0.8rem;
+    }
+    .tech-icons-grid {
+      gap: 15px;
+    }
+    .tech-badge span {
+      font-size: 0.85rem;
+    }
     .tech-badge-text {
+      font-size: 0.8rem;
       padding: 5px 10px;
     }
   }
