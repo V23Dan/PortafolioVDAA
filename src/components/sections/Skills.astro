@@ -1,0 +1,424 @@
+---
+import github from "../icons/Github.svg";
+import astro from "../icons/astro.svg";
+import angular from "../icons/angular.svg";
+import react from "../icons/react.svg";
+import nodejs from "../icons/nodejs.svg";
+import laravel from "../icons/laravel.svg";
+import postgresql from "../icons/postgresql.svg";
+import mongodb from "../icons/mongodb.svg";
+import mysql from "../icons/mysql.svg";
+import tailwind from "../icons/Tailwind.svg";
+import python from "../icons/Python.svg";
+
+export const skills = [
+  //Herramientas
+  {
+    name: "GitHub",
+    icon: github,
+    category: "Tools",
+  },
+  //Frontend
+  {
+    name: "Astro",
+    icon: astro,
+    category: "Frontend",
+  },
+  {
+    name: "Angular",
+    icon: angular,
+    category: "Frontend",
+  },
+  {
+    name: "React",
+    icon: react,
+    category: "Frontend",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: tailwind,
+    category: "Frontend",
+  },
+  //Backend
+  {
+    name: "Node.js",
+    icon: nodejs,
+    category: "Backend",
+  },
+  {
+    name: "Laravel",
+    icon: laravel,
+    category: "Backend",
+  },
+  {
+    name: "Python",
+    icon: python,
+    category: "Backend",
+  },
+  //Bases de datos
+  {
+    name: "PostgreSQL",
+    icon: postgresql,
+    category: "Base de datos",
+  },
+  {
+    name: "MongoDB",
+    icon: mongodb,
+    category: "Base de datos",
+  },
+  {
+    name: "MySQL",
+    icon: mysql,
+    category: "Base de datos",
+  },
+];
+---
+
+<section id="Skills">
+  <div class="space-skills">
+    <header class="header-skills">
+      <h1>Habilidades y herramientas</h1>
+      <div class="box-filters">
+        <label for="skillFilter">Filtrar</label>
+        <select name="filtros" id="skillFilter" class="filters">
+          <option value="Todos">Todos</option>
+          <option value="Backend">Backend</option>
+          <option value="Frontend">Frontend</option>
+          <option value="Base de datos">Base de datos</option>
+          <option value="Tools">Herramientas</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="content-skills" id="skillsContainer">
+      {
+        skills.map((skill) => (
+          <article class="card-skill" data-category={skill.category}>
+            <div class="box-icon-skill">
+              <img
+                src={skill.icon.src}
+                alt={`logo ${skill.name}`}
+                class="icons-skills"
+              />
+            </div>
+            <div>
+              <h2>{skill.name}</h2>
+              <p>{skill.category}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function initSkillFilter() {
+    const skillFilter = document.getElementById(
+      "skillFilter"
+    ) as HTMLSelectElement;
+    const skillsContainer = document.getElementById("skillsContainer");
+    const skillCards = document.querySelectorAll(
+      ".card-skill"
+    ) as NodeListOf<HTMLElement>;
+
+    if (!skillFilter || !skillsContainer) return;
+
+    // Función para filtrar skills
+    function filterSkills(selectedCategory: string) {
+      skillCards.forEach((card, index) => {
+        const category = card.dataset.category;
+        const shouldShow =
+          selectedCategory === "Todos" || category === selectedCategory;
+
+        if (shouldShow) {
+          card.style.display = "flex";
+          card.style.opacity = "0";
+          card.style.transform = "translateY(20px) scale(0.9)";
+
+          setTimeout(() => {
+            card.style.transition = "all 0.4s ease";
+            card.style.opacity = "1";
+            card.style.transform = "translateY(0) scale(1)";
+          }, index * 50);
+        } else {
+          card.style.transition = "all 0.3s ease";
+          card.style.opacity = "0";
+          card.style.transform = "translateY(-20px) scale(0.9)";
+
+          setTimeout(() => {
+            card.style.display = "none";
+          }, 300);
+        }
+      });
+
+      updateSkillCount(selectedCategory);
+    }
+
+    function updateSkillCount(category: string) {
+      const visibleCount =
+        category === "Todos"
+          ? skillCards.length
+          : Array.from(skillCards).filter(
+              (card) => card.dataset.category === category
+            ).length;
+    }
+
+    // Event listener para el select
+    skillFilter.addEventListener("change", (e) => {
+      const target = e.target as HTMLSelectElement;
+      const selectedCategory = target.value;
+
+      skillFilter.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        skillFilter.style.transform = "scale(1)";
+      }, 150);
+
+      filterSkills(selectedCategory);
+    });
+
+    // Inicializar mostrando todas las skills
+    filterSkills("Todos");
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", initSkillFilter);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSkillFilter);
+  } else {
+    initSkillFilter();
+  }
+</script>
+
+<style>
+  section {
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .space-skills {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .header-skills {
+    width: 100%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 0 10px;
+  }
+
+  .box-filters {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: linear-gradient(
+      45deg,
+      rgba(3, 52, 110, 0.1),
+      rgba(110, 172, 218, 0.05)
+    );
+    border-radius: 10px;
+    padding: 0.5rem 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .box-filters:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .box-filters label {
+    color: var(--color-secondary);
+    font-size: 1rem;
+  }
+
+  .filters {
+    outline: none;
+    border-color: var(--color-primary);
+    background: transparent;
+    border: 1px solid rgba(110, 172, 218, 0.2);
+    color: var(--color-text);
+    font-size: 1rem;
+    padding: 0.5rem 2rem 0.5rem 0.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236eacda' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1rem;
+  }
+
+  .filters:hover {
+    border-color: rgba(110, 172, 218, 0.4);
+    background-color: rgba(9, 36, 58, 0.3);
+  }
+
+  .filters:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(110, 172, 218, 0.1);
+  }
+
+  .filters option {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: none;
+  }
+
+  .filters option:hover,
+  .filters option:checked {
+    background: rgba(110, 172, 218, 0.1);
+    color: var(--color-primary);
+  }
+
+  h1 {
+    color: var(--color-text);
+    font-size: 2rem;
+  }
+
+  .content-skills {
+    max-width: 950px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border-radius: 20px;
+    gap: 20px;
+    border: 1px solid rgba(110, 172, 218, 0.3);
+    box-shadow: inset 0 0 20px 2px var(--color-background);
+    padding: 20px;
+    background: #09243a;
+    min-height: 300px;
+  }
+
+  .card-skill {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    text-align: center;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  .card-skill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.05),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .card-skill:hover::before {
+    left: 100%;
+  }
+
+  .card-skill:hover {
+    transform: translateY(-20px);
+    border-color: rgba(110, 172, 218, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  h2 {
+    color: var(--color-text);
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+  }
+
+  .card-skill p {
+    color: var(--color-secondary);
+    font-size: 14px;
+    opacity: 0.8;
+    margin: 0;
+  }
+
+  .box-icon-skill {
+    width: 100%;
+    min-height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+  }
+
+  .icons-skills {
+    width: 50px;
+    height: 50px;
+    filter: invert(1);
+    transition: transform 0.3s ease;
+  }
+
+  .card-skill:hover .icons-skills {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  @media (width < 1100px) {
+    .header-skills {
+      width: 85%;
+    }
+    .content-skills {
+      width: 85%;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .header-skills {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .box-filters {
+      justify-content: center;
+    }
+
+    .content-skills {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 15px;
+    }
+  }
+</style>
